@@ -4,18 +4,32 @@ import "./../assets/stylesheets/SignUp.css"
 class SignUp extends Component {
     constructor(props) {
         super(props)
-    }
-    render() {
 
+        // tạo cái model => ngay trong constructor
+        // chỉ ơ constructor mới có quyền gán (khởi tạo, gán state directly)
+        this.state = {
+            text: this.props.text
+        }
+    }
+
+    handleEmail = (event) => {
+        let value = event.target.value
+        this.setState({
+            text: `Welcome back to the web, ${value}`
+        })
+    }
+
+    // Thực hiện chức năng đăng ký
+    render() {
         return (
             <form className="signup-cont" >
                 <div className="signup-comp title">
                     <h1>Sign Up</h1>
-                    <small>Create an account for free</small>
+                    <p>{this.state.text}</p>
                 </div>
                 <div className="signup-comp">
                     <label htmlFor="">Email</label>
-                    <input type="email" name="" id="email" placeholder="Enter your email" required />
+                    <input type="email" name="" id="email" placeholder="Enter your email" required  onInput={this.handleEmail} />
                 </div>
                 <div className="signup-comp">
                     <label htmlFor="">Name</label>
@@ -45,14 +59,23 @@ class SignUp extends Component {
                     {/* </Link> */}
                 </div>
                 <div className="signup-comp">
-                    <input type="button" value="Sign Up" onClick={this.handleSubmit} />
+                    <input type="button" value={this.props.btnValue} onClick={this.handleSubmit} />
                 </div>
             </form >
-
         )
     }
 }
 
 export {
     SignUp
+}
+
+// Component => giống giống tương tự như 1 function
+function name(param1, param2, param3) {
+    // props ~ parameter
+    // state ~ local variable
+    let a = 1
+    let b = 2
+    let c = 3
+    // param1 = "?" => should be banned
 }
